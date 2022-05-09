@@ -1,0 +1,8 @@
+.dockerignore
+.gitignore
+.vscode
+.quasar
+node_modules
+dist
+.editorconfig
+yarn.error.log

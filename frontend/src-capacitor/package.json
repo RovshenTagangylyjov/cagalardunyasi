@@ -1,0 +1,11 @@
+{
+  "name": "cagalardunyasi",
+  "version": "0.0.1",
+  "description": "Çagalar Dünýäsi oýunjak dükany.",
+  "author": "Rovshen Tagangylyjov <rovshentagangylyjov@gmail.com>",
+  "private": true,
+  "dependencies": {
+    "@capacitor/cli": "^2.0.0",
+    "@capacitor/core": "^2.0.0"
+  }
+}

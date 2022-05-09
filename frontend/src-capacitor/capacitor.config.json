@@ -1,0 +1,7 @@
+{
+  "appId": "com.cagalardunyasi.app",
+  "appName": "Çagalar Dünýäsi",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www"
+}

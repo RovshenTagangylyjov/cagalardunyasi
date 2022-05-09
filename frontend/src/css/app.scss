@@ -1,0 +1,72 @@
+// app global css in SCSS form
+
+html,
+body {
+  max-width: 100vw !important;
+  overflow-x: hidden;
+}
+
+.section {
+  max-width: $w-lg;
+  width: 100%;
+  margin: auto;
+}
+
+.q-page {
+  @extend .section;
+  padding: 1.25rem 0.5rem;
+}
+
+.price {
+  font-size: 0.9rem;
+}
+
+@media screen and (min-width: 50em) {
+  html {
+    font-size: 2vw;
+  }
+}
+
+@media screen and (min-width: 75em) {
+  html {
+    font-size: 1.5em;
+  }
+}
+
+.q-layout__shadow:after,
+.q-table__card,
+.q-card:not(.q-card--flat) {
+  box-shadow: $shadow;
+}
+
+.admin-table {
+  /* height or max-height is important */
+  height: 100%;
+
+  .q-table__top,
+  .q-table__bottom,
+  thead tr:first-child th {
+    /* bg color is important for th; just specify one */
+    background-color: #fff;
+  }
+
+  thead tr th {
+    position: sticky;
+    z-index: 1;
+  }
+
+  /* this will be the loading indicator */
+  thead tr:last-child th {
+    /* height of all previous header rows */
+    top: 48px;
+  }
+
+  thead tr:first-child th {
+    top: 0;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $grey-10;
+}
