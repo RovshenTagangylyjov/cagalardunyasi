@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: echo "${{SSH_PRIVATE_KEY}}"
+    - run: echo "${{PRODUCTION_ENV}}"
+    - run: echo "${{PRODUCTION_ENV}}" > .production.env
+    - run: ls
+    - run: cat .production.env
