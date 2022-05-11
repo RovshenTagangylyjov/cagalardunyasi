@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: echo "${{ secrets.SSH_PRIVATE_KEY} }"
+      run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
     - run: echo "${{ secrets.PRODUCTION_ENV }}"
     - run: echo "${{ secrets.PRODUCTION_ENV }}" > .production.env
     - run: ls
