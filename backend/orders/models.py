@@ -35,7 +35,7 @@ class Order(models.Model):
         if self.status == self.COMPLETED:
             for cart_item in self.cart.items.all():
                 Product.objects.filter(cart_items__pk=cart_item.pk).update(
-                    total_solt=F('total_solt') + cart_item.quantity, stock=F('stock') - cart_item.quantity)
+                    total_sold=F('total_sold') + cart_item.quantity, stock=F('stock') - cart_item.quantity)
 
         self.total_price = self.cart.get_total_price()
 

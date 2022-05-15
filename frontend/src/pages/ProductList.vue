@@ -5,7 +5,7 @@ import { ref, watch, computed } from 'vue';
 import { useRoute, useRouter, RouteRecordName } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { QInfiniteScroll, QSelectOption, QInfiniteScrollProps } from 'quasar';
-import { ListResponseData, ProductQuery, Product } from 'src/types';
+import type { ListResponseData, ProductQuery, Product } from 'src/types';
 import { useProduct } from 'src/stores';
 import { generateQueryParams } from 'src/helpers/queryParams';
 
@@ -128,7 +128,6 @@ const infiniteScrollProps: QInfiniteScrollProps = {
           <q-icon name="smart_toy" size="20em" color="grey" />
         </div>
       </template>
-      <!-- class="col-12 row justify-center q-ma-lg" -->
       <template v-slot:loading>
         <div class="row justify-center q-ma-lg" style="width: 100vw">
           <q-spinner color="primary" size="40px" />

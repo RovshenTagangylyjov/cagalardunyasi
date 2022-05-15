@@ -3,7 +3,7 @@ import InputPassword from 'components/InputPassword.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { QInput } from 'quasar';
-import { UserLogin } from 'src/types';
+import type { UserLogin } from 'src/types';
 import { rules } from 'src/helpers/validation';
 import { useSession } from 'src/stores';
 
@@ -28,7 +28,7 @@ const login = async () => {
       :flat="$q.screen.lt.sm"
       class="q-mx-auto q-my-lg"
     >
-      <q-form @submit="login">
+      <q-form @submit.prevent="login">
         <q-card-section class="row justify-center q-py-none">
           <q-img src="~assets/logo.png" width="7rem" :ratio="1" />
         </q-card-section>
@@ -58,7 +58,6 @@ const login = async () => {
             type="submit"
             flat
             color="primary"
-            @click="login"
           />
         </q-card-section>
       </q-form>

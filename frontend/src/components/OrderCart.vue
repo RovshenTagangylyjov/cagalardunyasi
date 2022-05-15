@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import OrderCartItem from './OrderCartItem.vue';
-import { Cart } from 'src/types';
+import type { Cart } from 'src/types';
 
 defineProps<{ cart: Cart }>();
 </script>

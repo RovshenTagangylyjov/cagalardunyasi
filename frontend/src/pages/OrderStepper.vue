@@ -8,7 +8,7 @@ import { useRouter } from 'vue-router';
 import { QStepper, QInput, useQuasar } from 'quasar';
 import { useCart, useOrder, useAddresses } from 'src/stores';
 import { isFormValid } from 'src/helpers/validation';
-import { Address } from 'src/types';
+import type { Address } from 'src/types';
 
 const $q = useQuasar();
 const router = useRouter();

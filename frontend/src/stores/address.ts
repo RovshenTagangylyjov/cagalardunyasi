@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { Cookies } from 'quasar';
-import { Address } from 'src/types';
+import type { Address } from 'src/types';
 import { AxiosResponse, AxiosError } from 'axios';
 import { api } from 'boot/axios';
 import { notifyError } from 'src/helpers/notify';

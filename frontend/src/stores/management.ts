@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { api } from 'boot/axios';
 import { i18n } from 'boot/i18n';
-import { Management } from 'src/types';
+import type { Management } from 'src/types';
 import { AxiosResponse, AxiosError } from 'axios';
 import { notifyError, notifySuccess } from 'src/helpers/notify';
 

@@ -58,17 +58,18 @@ class ProductSerializer(serializers.ModelSerializer):
     def validate(self, data):
         super().validate(data)
 
-        if len(data['images']) == 0:
-            raise serializers.ValidationError('Images are required.')
+        if not self.partial:
+            if len(data['images']) == 0:
+                raise serializers.ValidationError('Images are required.')
 
-        if len(data['categories']) == 0:
-            raise serializers.ValidationError('Categories are required.')
+            if len(data['categories']) == 0:
+                raise serializers.ValidationError('Categories are required.')
 
-        if not (data['male'] or data['female']):
-            raise serializers.ValidationError('Product must be for either male or female.')
+            if not (data['male'] or data['female']):
+                raise serializers.ValidationError('Product must be for either male or female.')
 
-        if not (data['from_age'] < data['to_age']):
-            raise serializers.ValidationError('"From Age" must me smaller than "To Age".')
+            if not (data['from_age'] < data['to_age']):
+                raise serializers.ValidationError('"From Age" must me smaller than "To Age".')
 
         return data
 

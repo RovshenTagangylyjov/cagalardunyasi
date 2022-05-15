@@ -7,7 +7,7 @@ import { useRoute, useRouter, RouteRecordName } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useOrder } from 'src/stores';
 import { generateQueryParams } from 'src/helpers/queryParams';
-import { Order, ProductQuery } from 'src/types';
+import type { Order, ProductQuery } from 'src/types';
 import { DollarToManat } from 'src/helpers/product';
 
 const orderStore = useOrder();
@@ -205,7 +205,9 @@ const goToOrder = async (id: number) => {
           @click="props.toggleFullscreen"
           class="q-ml-md"
         />
-        <div class="q-table__title q-ml-md">{{ $t('label.orders') }}</div>
+        <div class="q-table__title q-ml-md">
+          {{ $t('label.orders') }}
+        </div>
         <q-space />
         <ButtonBase icon="refresh" @click="refresh" :loading="loading" />
         <q-input
@@ -241,9 +243,9 @@ const goToOrder = async (id: number) => {
           <q-td key="total_price" @click.stop :props="props"
             >{{ props.row.total_price }} $
           </q-td>
-          <q-td key="total_price_tmt" :props="props"
-            >{{ DollarToManat(props.row.total_price) }} TMT</q-td
-          >
+          <q-td key="total_price_tmt" :props="props">
+            {{ DollarToManat(props.row.total_price) }} TMT
+          </q-td>
           <q-td key="order" @click.stop :props="props">
             <OrderSelectStatus
               v-model="props.row.status"

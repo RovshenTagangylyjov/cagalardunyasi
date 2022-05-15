@@ -48,8 +48,9 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def validate(self, data):
-        if data['password'] != data['password2']:
-            raise serializers.ValidationError('Passwords are not the same!')
+        if not self.partial:
+            if data['password'] != data['password2']:
+                raise serializers.ValidationError('Passwords are not the same!')
 
         return super().validate(data)
 

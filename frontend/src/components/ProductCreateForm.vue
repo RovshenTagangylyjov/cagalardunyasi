@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { BaseProduct } from 'src/types';
+import type { BaseProduct } from 'src/types';
 import { useCategory } from 'src/stores';
 import { maxLength, rules } from 'src/helpers/validation';
 
@@ -74,7 +74,9 @@ const categoryStore = useCategory();
       :rules="[
         rules.required,
         () =>
-          product.from_age <= product.to_age ||
+          (product.from_age &&
+            product.to_age &&
+            product.from_age <= product.to_age) ||
           '\'From Age\' must be less than \'To Age\'',
       ]"
     />
@@ -93,7 +95,7 @@ const categoryStore = useCategory();
       :options="categoryStore.categories"
       option-value="id"
       option-label="name_tk"
-      :label="$t('product.categories')"
+      :label="$t('product.category', 2)"
       multiple
       emit-value
       map-options

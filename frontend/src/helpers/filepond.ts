@@ -1,4 +1,4 @@
-import { ProductImage, BaseImage } from 'src/types';
+import type { ProductImage, BaseImage } from 'src/types';
 import { api, config as BaseConfig } from 'boot/axios';
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import {
@@ -96,7 +96,7 @@ export const loadImage: LoadServerConfigFunction = (
   };
 };
 
-export const getOrdererdProductImages = (files: FilePondFile[]) => {
+export const getOrderedProductImages = (files: FilePondFile[]) => {
   const images: ProductImage[] = [];
   files.forEach((image, index) => {
     images.push({

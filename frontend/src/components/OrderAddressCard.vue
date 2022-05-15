@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Address } from 'src/types';
+import type { Address } from 'src/types';
 
 defineProps<{ address: Address; note: string | undefined }>();
 </script>

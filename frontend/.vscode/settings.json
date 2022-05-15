@@ -1,4 +1,5 @@
 {
+  "cSpell.words": ["Vite", "pinia", "filepond", "borderless", "swipeable"],
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
   "editor.formatOnSave": true,

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { User } from 'src/types';
+import type { User } from 'src/types';
 import { AxiosResponse, AxiosError } from 'axios';
 import { api } from 'boot/axios';
 import { useCart, useAddresses } from '.';
@@ -14,7 +14,9 @@ export const useUser = defineStore('user', {
       const addresses = useAddresses();
 
       await this.fetchUser();
-      await cart.login();
+      await cart.login().catch(async (error: AxiosError) => {
+        if (error.response?.status === 404) await cart.createCart();
+      });
       addresses.login(this.$state.addresses);
     },
     fetchUser() {

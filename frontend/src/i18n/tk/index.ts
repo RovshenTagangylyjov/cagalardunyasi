@@ -50,7 +50,7 @@ export default {
     stock: 'Mukdary',
     male: 'Oglanlar uçin',
     female: 'Gyzlar uçin',
-    categories: 'Kategoriýalar | Kategoriýa',
+    category: 'Kategoriýa | Kategoriýalar',
     fromAge: 'Ýaşdan başlap',
     toAge: 'Ýaşa çenli',
     isActive: 'Işjen',

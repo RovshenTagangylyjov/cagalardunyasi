@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ProductQuantity from './ProductQuantity.vue';
 import ButtonBase from './ButtonBase.vue';
-import { CartItem } from 'src/types';
+import type { CartItem, Product } from 'src/types';
 import { useCart } from 'src/stores';
 import { computed, ref, inject } from 'vue';
 import { DollarToManat } from 'src/helpers/product';
@@ -38,10 +38,10 @@ const quantity = computed({
 
     <q-item-section class="col-8 col-sm-6 q-pl-sm">
       <q-item-label>
-        {{ cartItem.product[`name_${$i18n.locale}`] }}
+        {{ cartItem.product[`name_${$i18n.locale}` as keyof Product] }}
       </q-item-label>
       <q-item-label caption>
-        {{ cartItem.product[`description_${$i18n.locale}`] }}
+        {{ cartItem.product[`description_${$i18n.locale}` as keyof Product] }}
       </q-item-label>
     </q-item-section>
 

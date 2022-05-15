@@ -41,9 +41,9 @@ def get_merged_cart(user_cart: Cart, session_cart: Cart, user: User):
     return user_cart
 
 
-def optimize_cart(cart: Cart):
+def merge_duplicates(cart: Cart):
     for item in cart.items.all():
-        if item.product.is_deleted or  item.product.stock <= 0:
+        if item.product.is_deleted or item.product.stock <= 0:
             item.delete()
 
         if item.product.stock > item.quantity:

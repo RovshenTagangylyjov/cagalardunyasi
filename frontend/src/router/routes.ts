@@ -34,6 +34,9 @@ export default function (store: Pinia) {
           name: 'ProductCreate',
           path: 'create/',
           component: () => import('pages/ProductCreate.vue'),
+          meta: {
+            adminOnly: true,
+          },
         },
         {
           name: 'ProductDetail',
@@ -55,6 +58,9 @@ export default function (store: Pinia) {
             const id = route.params.id as string;
 
             return { slug, id: Number.parseInt(id, 10) };
+          },
+          meta: {
+            adminOnly: true,
           },
         },
       ],

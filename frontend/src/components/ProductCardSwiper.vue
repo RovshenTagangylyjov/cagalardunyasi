@@ -8,7 +8,7 @@ import { Autoplay, FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
 import ProductCard from './ProductCard.vue';
-import { Product, ListResponseData, ProductFilter } from 'src/types';
+import type { Product, ListResponseData, ProductFilter } from 'src/types';
 import { notifyError } from 'src/helpers/notify';
 import { provide } from 'vue';
 

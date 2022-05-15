@@ -10,22 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
 from datetime import timedelta
 
+from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-su^^g5yhvayaaoqd@d5(o_7#w-2(4@134$z=&6e*uug&f-382v'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io', '192.168.1.164']
 
@@ -54,7 +56,9 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'django_filters',
-    'debug_toolbar'
+    'debug_toolbar',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
 ]
 
 MIDDLEWARE = [
@@ -67,10 +71,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'django_otp.middleware.OTPMiddleware',
     # Custom
     'middlewares.sessions.AnonymousUserSessionMiddleware',
 ]
+
+# security
+OTP_TOTP_ISSUER = 'Çagalar Dünýäsi'
+OTP_HOTP_THROTTLE_FACTOR = 2
 
 ROOT_URLCONF = 'cagalardunyasi.urls'
 
@@ -108,11 +116,13 @@ DATABASES = {
     }
 }
 
+REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
+REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379',
+        'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}',
     }
 }
 
@@ -135,11 +145,26 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'tk'
 
 TIME_ZONE = 'Asia/Ashgabat'
 
@@ -147,11 +172,30 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
+# Provide a lists of languages which your site supports.
+LANGUAGES = (('tk', _('Turkmen')),)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CALLING_FORMAT = 'boto.s3.connection.VHostCallingFormat'
+AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
+AWS_S3_CUSTOM_DOMAIN = AWS_STORAGE_BUCKET_NAME
+
+DEFAULT_FILE_STORAGE = 'cagalardunyasi.storage_backends.MediaStorage'
+STATICFILES_STORAGE = 'cagalardunyasi.storage_backends.StaticStorage'
+
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+AWS_IS_GZIPPED = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -161,23 +205,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "assets")
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = '/media/'
-
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:9000',
-    'http://localhost:9000',
-    'http://localhost:8080',
-    'http://127.0.0.1:8080',
-    'http://localhost:4000',
-    'http://127.0.0.1:4000',
-    'http://192.168.1.164:4000'
+    'https://cagalardunyasi.com'
 ]
 
 
-COOKIE_AGE = 3600 * 24 * 15  # 15 days
+COOKIE_AGE = 3600 * 24 * 30  # 30 days
 
 SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True
@@ -209,7 +243,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'cagalardunyasi.pagination.CustomLimitOffsetPagination',
     'PAGE_SIZE': 10,
     'COERCE_DECIMAL_TO_STRING': False,
-    'DATETIME_FORMAT': "%d.%m.%Y %H:%M:%S"
+    'DATETIME_FORMAT': '%d.%m.%Y %H:%M:%S'
 }
 
-INTERNAL_IPS = ['127.0.0.1']
+INTERNAL_IPS = []

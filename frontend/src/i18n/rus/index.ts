@@ -50,7 +50,7 @@ export default {
     stock: 'Количество',
     male: 'Мужской',
     female: 'Женский',
-    categories: 'Категории | Категория',
+    category: 'Категория | Категории',
     fromAge: 'Возраст от',
     toAge: 'Возраст до',
     isActive: 'Действует',

@@ -14,7 +14,7 @@ const actionProps = computed((): QFabActionProps[] => {
     },
     {
       icon: 'category',
-      label: i18n.t('product.categories'),
+      label: i18n.t('product.category', 2),
       to: { name: 'AdminCategories' },
     },
     {

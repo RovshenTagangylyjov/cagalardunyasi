@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { Rating } from 'src/types';
+import type { Rating } from 'src/types';
 import { useProduct } from 'src/stores';
 
 const productStore = useProduct();

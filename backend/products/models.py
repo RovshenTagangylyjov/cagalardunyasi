@@ -38,7 +38,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2)
     stock = models.PositiveSmallIntegerField()
     liked_by = models.ManyToManyField(get_user_model(), related_name='favorites')
-    total_solt = models.IntegerField(default=0)
+    total_sold = models.IntegerField(default=0)
     total_rated_users = models.IntegerField(default=0)
     total_rate = models.IntegerField(default=0)
 

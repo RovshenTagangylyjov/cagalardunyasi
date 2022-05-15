@@ -79,6 +79,7 @@ module.exports = configure(function (/* ctx */) {
           {
             // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
             // compositionOnly: false,
+            runtimeOnly: false,
 
             // you need to set i18n resource including paths !
             include: path.resolve(__dirname, './src/i18n/**'),
@@ -89,13 +90,13 @@ module.exports = configure(function (/* ctx */) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
-      // proxy: {
-      //   'api': {
-      //     target: 'http://127.0.0.1:8000',
-      //     changeOrigin: true,
-      //   },
-      // },
-      // https: true
+      proxy: {
+        '/api': {
+          target: 'http://localhost:8000',
+          changeOrigin: true,
+        },
+      },
+
       open: true, // opens browser window automatically
     },
 

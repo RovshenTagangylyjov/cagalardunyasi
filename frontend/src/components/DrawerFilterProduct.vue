@@ -8,7 +8,7 @@ import {
 } from 'vue-router';
 import { QBtn } from 'quasar';
 import { useCategory } from 'src/stores';
-import { ProductFilter, ProductQuery } from 'src/types';
+import type { ProductFilter, ProductQuery, Category } from 'src/types';
 import { DollarToManat, ManatToDollar } from 'src/helpers/product';
 
 const props = defineProps<{ modelValue: boolean }>();
@@ -163,12 +163,12 @@ const clearFilter = () => {
         </div>
       </q-expansion-item>
 
-      <q-expansion-item expand-separator :label="$t('product.categories')">
+      <q-expansion-item expand-separator :label="$t('product.category', 2)">
         <div class="column q-pa-md">
           <q-checkbox
             v-for="category in categoryStore.$state.categories"
             :key="category.id"
-            :label="category[`name_${$i18n.locale}`]"
+            :label="category[`name_${$i18n.locale}` as keyof Category].toString()"
             :val="category.slug"
             v-model="filter.categories"
           />

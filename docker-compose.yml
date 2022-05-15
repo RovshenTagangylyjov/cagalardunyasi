@@ -12,6 +12,8 @@ services:
       - backend
     links:
       - backend
+    env_file:
+      - .${ENVIRONMENT}.env
 
   backend:
     container_name: backend
@@ -26,6 +28,8 @@ services:
     links:
       - postgres
       - redis
+    env_file:
+      - .${ENVIRONMENT}.env
 
   postgres:
     container_name: postgres
@@ -35,6 +39,8 @@ services:
       - "5432:5432"
     volumes:
       - /var/lib/postgresql/data/:/var/lib/postgresql/data/
+    env_file:
+      - .${ENVIRONMENT}.env
 
   redis:
     container_name: redis

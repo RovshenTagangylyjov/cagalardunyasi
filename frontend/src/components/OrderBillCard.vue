@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { DollarToManat } from 'src/helpers/product';
+
 defineProps<{ price: number }>();
 </script>
 

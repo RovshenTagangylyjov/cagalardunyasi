@@ -5,7 +5,7 @@ import ButtonBase from 'components/ButtonBase.vue';
 import { ref } from 'vue';
 import { QTable, QTableColumn } from 'quasar';
 import { useCategory } from 'src/stores';
-import { Category } from 'src/types';
+import type { Category } from 'src/types';
 import { useI18n } from 'vue-i18n';
 
 const i18n = useI18n();
@@ -72,7 +72,7 @@ const deleteCategories = async () => {
     />
     <DialogConfirmDelete
       v-model="isDeleteConfirmVisible"
-      :item-name="$t('product.category', 2)"
+      :item-name="$t('product.category')"
       @confirm="deleteCategories"
     />
     <q-table
@@ -92,7 +92,9 @@ const deleteCategories = async () => {
           @click="props.toggleFullscreen"
           class="q-ml-md"
         />
-        <div class="q-table__title q-ml-md">{{ $t('product.categories') }}</div>
+        <div class="q-table__title q-ml-md">
+          {{ $t('product.category', 2) }}
+        </div>
         <ButtonBase
           icon="add"
           class="q-ml-md"

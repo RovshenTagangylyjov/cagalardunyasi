@@ -3,11 +3,11 @@ import ButtonOpenFilter from 'components/ButtonOpenFilter.vue';
 import ButtonBase from 'components/ButtonBase.vue';
 import { ref, computed, nextTick, watch } from 'vue';
 import { useRoute, useRouter, RouteRecordName } from 'vue-router';
-import { useI18n } from 'vue-i18n';
 import { QTable, QTableProps, QTableColumn, QVirtualScroll } from 'quasar';
 import { useProduct, useManagement } from 'src/stores';
+import { useI18n } from 'vue-i18n';
 import { generateQueryParams } from 'src/helpers/queryParams';
-import { Product, ProductQuery, Category } from 'src/types';
+import type { Product, ProductQuery, Category } from 'src/types';
 import { DollarToManat } from 'src/helpers/product';
 
 const props = defineProps<{ isFilterDrawerOpen: boolean }>();
@@ -69,7 +69,7 @@ const columns: QTableColumn<Product>[] = [
   },
   {
     name: 'categories',
-    label: i18n.t('product.categories'),
+    label: i18n.t('product.category', 2),
     align: 'left',
     field: (row) => {
       let categoryNames: string[] = [];
@@ -106,10 +106,10 @@ const columns: QTableColumn<Product>[] = [
   },
 
   {
-    name: 'total_solt',
+    name: 'total_sold',
     label: i18n.t('product.totalSolt'),
     align: 'center',
-    field: 'total_solt',
+    field: 'total_sold',
     sortable: true,
   },
   {
@@ -259,7 +259,7 @@ const savePopup = async (
           dense
           debounce="300"
           v-model="search"
-          :label="$t('label.search')"
+          :label="i18n.t('label.search')"
           class="q-ml-md"
         >
           <template v-slot:append>
@@ -286,8 +286,8 @@ const savePopup = async (
           >
             {{ props.row.id }}
           </q-td>
-          <q-td :key="`name_${$i18n.locale}`" :props="props">
-            {{ props.row[`name_${$i18n.locale}`] }}
+          <q-td :key="`name_${i18n.locale.value}`" :props="props">
+            {{ props.row[`name_${i18n.locale.value}`] }}
           </q-td>
           <q-td key="categories" :props="props">
             {{ productStore.getCategoryNames(props.row.id).join(', ') }}
@@ -329,8 +329,8 @@ const savePopup = async (
               />
             </q-popup-edit>
           </q-td>
-          <q-td key="total_solt" :props="props">
-            {{ props.row.total_solt }}
+          <q-td key="total_sold" :props="props">
+            {{ props.row.total_sold }}
           </q-td>
           <q-td key="date_updated" :props="props">
             {{ props.row.date_updated }}

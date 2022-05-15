@@ -3,7 +3,7 @@ import InputPassword from 'components/InputPassword.vue';
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { QInput } from 'quasar';
-import { UserRegister, InputProps } from 'src/types';
+import type { UserRegister, InputProps } from 'src/types';
 import { useSession } from 'src/stores';
 import { rules } from 'src/helpers/validation';
 import { useI18n } from 'vue-i18n';
@@ -72,7 +72,7 @@ const inputProps = computed((): InputProps<UserRegister>[] => {
       :flat="$q.screen.lt.sm"
       class="q-mx-auto q-my-lg"
     >
-      <q-form @submit="register">
+      <q-form @submit.prevent="register">
         <q-card-section class="row justify-center q-py-none">
           <q-img src="~assets/logo.png" width="7rem" :ratio="1" />
         </q-card-section>

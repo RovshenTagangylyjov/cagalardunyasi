@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { Loading, LocalStorage } from 'quasar';
 import { api } from 'boot/axios';
 import { i18n } from 'boot/i18n';
-import {
+import type {
   UserLogin,
   TokenPair,
   AccessToken,

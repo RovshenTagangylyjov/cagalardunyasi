@@ -5,9 +5,9 @@ import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 import { useRouter } from 'vue-router';
 import { useProduct } from 'src/stores';
-import { BaseProduct } from 'src/types';
+import type { BaseProduct } from 'src/types';
 import { FilePond, FilePondFile } from 'filepond';
-import { getOrdererdProductImages } from 'src/helpers/filepond';
+import { getOrderedProductImages } from 'src/helpers/filepond';
 
 const $q = useQuasar();
 const router = useRouter();
@@ -16,7 +16,7 @@ const productStore = useProduct();
 const product = productStore.product as BaseProduct;
 
 async function createProduct() {
-  product.images = getOrdererdProductImages(
+  product.images = getOrderedProductImages(
     filepond.value?.ref.getFiles() as FilePondFile[]
   );
 
@@ -32,7 +32,7 @@ async function createProduct() {
 <template>
   <q-page>
     <q-separator spaced="1rem" v-if="!$q.screen.lt.md" />
-    <q-form @submit="createProduct">
+    <q-form @submit.prevent="createProduct">
       <div class="row justify-between q-py-md">
         <div class="col-12 col-md-6 q-px-sm q-col-gutter-sm">
           <ProductCreateForm v-model="product" />

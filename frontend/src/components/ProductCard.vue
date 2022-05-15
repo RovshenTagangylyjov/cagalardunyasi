@@ -2,7 +2,7 @@
 import ButtonAddToCart from 'components/ButtonAddToCart.vue';
 import ButtonAddToFavorites from './ButtonAddToFavorites.vue';
 import { ref } from 'vue';
-import { Product } from 'src/types';
+import type { Product } from 'src/types';
 import { DollarToManat } from 'src/helpers/product';
 
 defineProps<{ product: Product }>();
@@ -33,7 +33,7 @@ const isHovered = ref<boolean>(false);
           :src="product.images[0].path"
           :ratio="1"
           fit="cover"
-          :alt="product[`name_${$i18n.locale}`]"
+          :alt="product[`name_${$i18n.locale}` as keyof Product]?.toString()"
         >
           <ButtonAddToFavorites
             :isFavorite="product.is_favorite"
@@ -46,7 +46,7 @@ const isHovered = ref<boolean>(false);
       </q-card-section>
       <q-card-section>
         <div class="title">
-          {{ product[`name_${$i18n.locale}`] }}
+          {{ product[`name_${$i18n.locale}` as keyof Product] }}
         </div>
         <div class="rating">
           <q-rating

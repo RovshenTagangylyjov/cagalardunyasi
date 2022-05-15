@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { notifySuccess, notifyError } from 'src/helpers/notify';
-import { Cart, CartItem, Product } from 'src/types';
+import type { Cart, CartItem, Product } from 'src/types';
 import { AxiosResponse, AxiosError } from 'axios';
 import { Cookies } from 'quasar';
 import { api } from 'boot/axios';

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ButtonBase from './ButtonBase.vue';
 import { ref } from 'vue';
-import { ProductImage } from 'src/types';
+import type { ProductImage } from 'src/types';
 
 defineProps<{ images: ProductImage[] }>();
 const slide = ref<number>(0);

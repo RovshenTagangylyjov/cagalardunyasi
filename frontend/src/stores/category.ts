@@ -4,7 +4,7 @@ import { i18n } from 'boot/i18n';
 import { Loading } from 'quasar';
 import { AxiosResponse, AxiosError } from 'axios';
 import { notifySuccess, notifyError } from 'src/helpers/notify';
-import { Category } from 'src/types';
+import type { Category } from 'src/types';
 
 export const useCategory = defineStore('category', {
   state: () => {

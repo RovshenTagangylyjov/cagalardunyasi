@@ -5,6 +5,7 @@ import ProductCardSwiper from 'components/ProductCardSwiper.vue';
 import { useCategory } from 'src/stores';
 import { ref } from 'vue';
 import { QInfiniteScroll, QInfiniteScrollProps } from 'quasar';
+import type { Category } from 'src/types';
 
 const categoryStore = useCategory();
 const page = ref<number>(categoryStore.$state.categories.length ? 1 : 0);
@@ -41,7 +42,7 @@ const infiniteScrollProps: QInfiniteScrollProps = {
       <ProductCardSwiper
         class="q-my-xl"
         :label="$t('sort.mostPopular')"
-        :filter="{ ordering: '-total_solt' }"
+        :filter="{ ordering: '-total_sold' }"
       />
       <template #fallback>
         <div class="row justify-center">
@@ -57,8 +58,9 @@ const infiniteScrollProps: QInfiniteScrollProps = {
       />
       <template #fallback>
         <div class="row justify-center">
-          <q-spinner color="primary" class="text-center" size="40px" /></div
-      ></template>
+          <q-spinner color="primary" class="text-center" size="40px" />
+        </div>
+      </template>
     </Suspense>
     <Suspense>
       <ProductCardSwiper
@@ -68,8 +70,9 @@ const infiniteScrollProps: QInfiniteScrollProps = {
       />
       <template #fallback>
         <div class="row justify-center">
-          <q-spinner color="primary" class="text-center" size="40px" /></div
-      ></template>
+          <q-spinner color="primary" class="text-center" size="40px" />
+        </div>
+      </template>
     </Suspense>
     <q-infinite-scroll
       ref="infiniteScroll"
@@ -84,7 +87,9 @@ const infiniteScrollProps: QInfiniteScrollProps = {
           <ProductCardSwiper
             class="q-my-xl"
             :filter="{ categories: [categoryStore.categories[index].slug] }"
-            :label="categoryStore.categories[index][`name_${$i18n.locale}`]"
+            :label="
+              categoryStore.categories[index][`name_${$i18n.locale}` as keyof Category].toString()
+            "
           />
           <template #fallback>
             <div class="row justify-center" style="min-height: 300px">

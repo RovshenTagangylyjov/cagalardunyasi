@@ -3,7 +3,7 @@ import { api } from 'boot/axios';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useProduct } from 'src/stores';
 import { Loading } from 'quasar';
-import { Product } from 'src/types';
+import type { Product } from 'src/types';
 
 export default {
   preFetch: preFetch(async ({ store, currentRoute, redirect }) => {

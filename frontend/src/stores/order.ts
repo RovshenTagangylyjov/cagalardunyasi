@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { api } from 'boot/axios';
 import { i18n } from 'boot/i18n';
 import { notifySuccess, notifyError } from 'src/helpers/notify';
-import { Order, OrderForm, ListResponseData } from 'src/types';
+import type { Order, OrderForm, ListResponseData } from 'src/types';
 import { AxiosResponse, AxiosError } from 'axios';
 import { useCart } from '.';
 import { Loading } from 'quasar';

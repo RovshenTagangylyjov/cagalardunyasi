@@ -36,7 +36,7 @@ const navProps = computed((): NavProps[] => {
     },
     {
       icon: 'category',
-      label: i18n.t('product.categories'),
+      label: i18n.t('product.category', 2),
       to: { name: 'AdminCategories' },
     },
     // TODO: Add Users to Admin page

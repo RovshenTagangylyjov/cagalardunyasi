@@ -1,6 +1,7 @@
 import { boot } from 'quasar/wrappers';
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosError } from 'axios';
 import { useSession } from 'src/stores';
+import { sleep } from 'src/helpers';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -20,7 +21,7 @@ interface AxiosRetryConfig extends AxiosRequestConfig {
 // for each client)
 
 export const config: AxiosRequestConfig = {
-  baseURL: 'http://127.0.0.1:8000/api/',
+  baseURL: 'api/',
   withCredentials: true,
 };
 
@@ -38,30 +39,28 @@ export default boot(({ app, store, router }) => {
     return config;
   });
 
-  api.interceptors.response.use(
-    (response) => response,
-    async (error: AxiosError) => {
-      const config = error.config as AxiosRetryConfig;
+  api.interceptors.response.use(undefined, async (error: AxiosError) => {
+    const config = error.config as AxiosRetryConfig;
+    if (error.config && error.response) {
+      if (error.response.status === 401) {
+        if (!config._retry) {
+          config._retry = true;
+          await session.refreshToken();
 
-      if (error.config && error.response) {
-        if (error.response.status === 401) {
-          if (!config._retry) {
-            config._retry = true;
-            await session.refreshToken();
-            return api(config);
-          }
-
-          await router.push({ name: 'MainPage' });
+          return api(config);
         }
-      }
 
-      if (!error.response) {
-        return api(config);
+        await router.push({ name: 'MainPage' });
       }
-
-      return Promise.reject(error);
     }
-  );
+
+    if (error && !error.response) {
+      await sleep(1000);
+      return api(config);
+    }
+
+    return Promise.reject(error);
+  });
   // for use inside Vue files (Options API) through this.$axios and this.$api
 
   app.config.globalProperties.$axios = axios;

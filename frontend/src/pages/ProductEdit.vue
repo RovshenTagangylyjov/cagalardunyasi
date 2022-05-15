@@ -10,8 +10,8 @@ import TheImageUpload from 'components/TheImageUpload.vue';
 import { ref } from 'vue';
 import { useProduct } from 'src/stores';
 import { FilePond, FilePondFile } from 'filepond';
-import { getOrdererdProductImages } from 'src/helpers/filepond';
-import { Product } from 'src/types';
+import { getOrderedProductImages } from 'src/helpers/filepond';
+import type { Product } from 'src/types';
 import { useRouter } from 'vue-router';
 
 const productStore = useProduct();
@@ -20,7 +20,7 @@ const product = productStore.product as Product;
 const filepond = ref<{ ref: FilePond }>();
 
 async function updateProduct() {
-  product.images = getOrdererdProductImages(
+  product.images = getOrderedProductImages(
     filepond.value?.ref.getFiles() as FilePondFile[]
   );
 
@@ -36,7 +36,7 @@ async function updateProduct() {
 <template>
   <q-page>
     <q-separator spaced="1rem" v-if="!$q.screen.lt.md" />
-    <q-form @submit="updateProduct">
+    <q-form @submit.prevent="updateProduct">
       <div class="row justify-between q-py-md">
         <div class="col-12 col-md-6 q-px-sm q-col-gutter-md">
           <ProductCreateForm v-if="product" v-model="product" />

@@ -5,7 +5,7 @@ import { i18n } from 'boot/i18n';
 import { notifySuccess, notifyError } from 'src/helpers/notify';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useCategory } from '.';
-import {
+import type {
   BaseProduct,
   Product,
   Category,

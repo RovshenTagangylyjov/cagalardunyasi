@@ -12,7 +12,7 @@ import ProductQuantity from 'components/ProductQuantity.vue';
 import DialogConfirmDelete from 'components/DialogConfirmDelete.vue';
 import { ref } from 'vue';
 import { useProduct, useUser } from 'src/stores';
-import { Product } from 'src/types';
+import type { Product } from 'src/types';
 import { useRouter } from 'vue-router';
 import { DollarToManat } from 'src/helpers/product';
 
@@ -33,7 +33,7 @@ const deleteProduct = async () => {
     <template v-if="user.$state.is_staff">
       <div class="row">
         <div class="text-h6 text-grey-9">
-          {{ $t('product.totalSolt') }}: {{ product.total_solt }}
+          {{ $t('product.totalSolt') }}: {{ product.total_sold }}
         </div>
         <q-space />
         <div>
@@ -93,12 +93,14 @@ const deleteProduct = async () => {
           />
         </div>
 
-        <div class="row text-h6">{{ product[`name_${$i18n.locale}`] }}</div>
+        <div class="row text-h6">
+          {{ product[`name_${$i18n.locale}` as keyof Product] }}
+        </div>
         <div
           class="row text-caption text-justify"
-          v-if="product[`description_${$i18n.locale}`]"
+          v-if="product[`description_${$i18n.locale}` as keyof Product]"
         >
-          {{ product[`description_${$i18n.locale}`] }}
+          {{ product[`description_${$i18n.locale}` as keyof Product] }}
         </div>
         <div class="row justify-between items-center">
           <div class="price text-no-wrap text-subtitle text-bold">

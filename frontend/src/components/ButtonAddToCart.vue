@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 import { QBtnProps } from 'quasar';
 import { useCart } from 'src/stores';
-import { Product } from 'src/types';
+import type { Product } from 'src/types';
 import { useI18n } from 'vue-i18n';
 
 interface Props {

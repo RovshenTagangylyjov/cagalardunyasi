@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
                 ('male', models.BooleanField()),
                 ('price', models.DecimalField(decimal_places=2, max_digits=7)),
                 ('stock', models.PositiveSmallIntegerField()),
-                ('total_solt', models.IntegerField(default=0)),
+                ('total_sold', models.IntegerField(default=0)),
                 ('total_rated_users', models.IntegerField(default=0)),
                 ('total_rate', models.IntegerField(default=0)),
                 ('is_active', models.BooleanField(default=True)),

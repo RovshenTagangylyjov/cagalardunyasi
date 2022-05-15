@@ -40,7 +40,7 @@ export interface Product extends BaseProduct {
   rate_count: number;
   is_favorite: boolean;
   users_rating: Rating | null;
-  total_solt: number;
+  total_sold: number;
   date_created: string;
   date_updated: string;
 }

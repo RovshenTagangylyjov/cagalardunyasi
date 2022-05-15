@@ -7,7 +7,7 @@ from rest_framework.viewsets import GenericViewSet
 
 from cagalardunyasi.settings import COOKIE_AGE
 from mixins.generics import UsersStaffMixin
-from .helpers import get_merged_cart, optimize_cart
+from .helpers import get_merged_cart, merge_duplicates
 from .models import Cart, CartItem
 from .serializers import CartSerializer, CartItemSerializer
 
@@ -19,7 +19,7 @@ class CartViewSet(UsersStaffMixin, CreateModelMixin, RetrieveModelMixin, Generic
 
     def get_object(self):
         cart = super().get_object()
-        optimize_cart(cart)
+        merge_duplicates(cart)
 
         return cart
 
@@ -39,8 +39,10 @@ class CartViewSet(UsersStaffMixin, CreateModelMixin, RetrieveModelMixin, Generic
         except (KeyError, Cart.DoesNotExist):
             pass
 
-        optimize_cart(cart)
+        if cart is None:
+            return Response(status=HTTP_404_NOT_FOUND)
 
+        merge_duplicates(cart)
         serializer = self.serializer_class(cart)
         return Response(serializer.data)
 

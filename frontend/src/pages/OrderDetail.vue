@@ -4,7 +4,7 @@ import { api } from 'boot/axios';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useOrder } from 'src/stores';
 import { Loading } from 'quasar';
-import { Order } from 'src/types';
+import type { Order } from 'src/types';
 
 export default {
   preFetch: preFetch(async ({ store, currentRoute, redirect }) => {

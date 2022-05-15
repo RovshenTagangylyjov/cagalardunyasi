@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 import { QInput, Cookies } from 'quasar';
 import { rules } from 'src/helpers/validation';
 import { useUser, useAddresses } from 'src/stores';
-import { Address } from 'src/types';
+import type { Address } from 'src/types';
 
 const props = defineProps<{
   orderNote: string;
