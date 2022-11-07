@@ -21,7 +21,7 @@ interface AxiosRetryConfig extends AxiosRequestConfig {
 // for each client)
 
 export const config: AxiosRequestConfig = {
-  baseURL: 'api/',
+  baseURL: '/api/',
   withCredentials: true,
 };
 
@@ -42,16 +42,15 @@ export default boot(({ app, store, router }) => {
   api.interceptors.response.use(undefined, async (error: AxiosError) => {
     const config = error.config as AxiosRetryConfig;
     if (error.config && error.response) {
-      if (error.response.status === 401) {
-        if (!config._retry) {
-          config._retry = true;
-          await session.refreshToken();
-
-          return api(config);
-        }
-
-        await router.push({ name: 'MainPage' });
-      }
+      // if (error.response.status === 401) {
+      //   if (!config._retry) {
+      //     console.log(config._retry);
+      //     config._retry = true;
+      //     await session.refreshToken();
+      //     return api(config);
+      //   }
+      //   await router.push({ name: 'MainPage' });
+      // }
     }
 
     if (error && !error.response) {

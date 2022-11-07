@@ -56,19 +56,7 @@ const imageUploadApi: FilePondServerConfigProps = {
 </script>
 
 <template>
-  <VueFilePond
-    ref="filepond"
-    name="path"
-    :files="imageUrls"
-    :label-idle="`${$t('label.dropImagesHere')}...`"
-    :allow-multiple="true"
-    :allow-reorder="true"
-    :drop-validation="true"
-    :check-validity="true"
-    item-insert-location="after"
-    max-file-size="3MB"
-    image-crop-aspect-ratio="1:1"
-    accepted-file-types="image/jpeg"
-    v-bind="imageUploadApi"
-  />
+  <VueFilePond ref="filepond" name="path" :files="imageUrls" :label-idle="`${$t('label.dropImagesHere')}...`"
+    :allow-multiple="true" :allow-reorder="true" :drop-validation="true" :check-validity="true"
+    item-insert-location="after" max-file-size="3MB" image-crop-aspect-ratio="1:1" v-bind="imageUploadApi" />
 </template>

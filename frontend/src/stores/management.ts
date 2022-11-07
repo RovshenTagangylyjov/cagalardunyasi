@@ -15,7 +15,7 @@ export const useManagement = defineStore('management', {
     initialize() {
       return new Promise<Management>((resolve, reject) => {
         api
-          .get('management/1/')
+          .get('management/2/')
           .then((response: AxiosResponse<Management>) => {
             this.$state = response.data;
 
@@ -30,7 +30,7 @@ export const useManagement = defineStore('management', {
     updateDollar(dollar: number) {
       return new Promise<Management>((resolve, reject) => {
         api
-          .patch('management/1/', { dollar })
+          .patch('management/2/', { dollar })
           .then((response: AxiosResponse<Management>) => {
             this.$state = response.data;
 
